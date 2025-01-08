@@ -16,7 +16,7 @@ def download_with_proxy(image_url, image_path):
     """
     proxies_info: dict[str, Any] = get_proxies()
     for proxy in proxies_info:
-        logger.info('download_with_proxy proxies is {}, image_url is {}'.format(proxy, image_url))
+        logger.debug('download_with_proxy proxies is {}, image_url is {}'.format(proxy, image_url))
         response = requests.get(image_url, proxies={'http': proxy, 'https': proxy}, timeout=60)
         if response.status_code == 200:
             with open(image_path, 'wb') as f:
@@ -27,7 +27,7 @@ def download_with_proxy(image_url, image_path):
                         .format(proxy, image_url))
             break
         else:
-            logger.debug('download_with_proxy failed proxies is {}, image_url is {}, response.status_code is {}'
+            logger.info('download_with_proxy failed proxies is {}, image_url is {}, response.status_code is {}'
                          .format(proxy, image_url, response.status_code))
 
 

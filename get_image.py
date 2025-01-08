@@ -23,6 +23,7 @@ def get_image_url(html):
     # 从缩略图列表页中找到原图的url，并返回这一页的图片数量
     soup = BeautifulSoup(html, "lxml")
     link_list = soup.find_all("a", class_="iusc")
+    image_url_list = []
     # 最多取 count 个
     for link in link_list:
         slink = str(link)
@@ -36,7 +37,8 @@ def get_image_url(html):
         image_url = mt.group(1)
         # image_url = mt.group(1) if mt is not None else mt1.group(1)
         # logger.debug('get image url {}', image_url)
-        yield image_url
+        image_url_list.append(image_url)
+    return image_url_list
 
 
 def save_image(
@@ -57,12 +59,9 @@ def save_image(
 
     # 判断是否已下载
     if image_url in cached_urls:
-        logger.debug("Image already downloaded: {}", image_url)
-        return False
-
-    # 从原图url中将原图保存到本地
+        logger.debug("image already downloaded: {}", image_url)
+        return True
     try:
-        time.sleep(0.5)
         # \W+: 匹配一个或多个非字母数字字符。
         # re.sub: 用空字符串替换匹配到的部分。
         new_key_wd = re.sub(r'\W+', '', key_wd)
@@ -71,9 +70,7 @@ def save_image(
         image_path = os.path.join(image_dir, '{}-{}-{}.{}'.format(new_key_wd, idx, int(time.time()),'jpg'))
         download_image(image_url, image_path, use_proxy=True)
     except Exception as e:
-        time.sleep(1)
         logger.error('{} error {}', image_url, e)
-        # logger.exception(e)
         return False
     else:
         logger.info("have saved {} images, image_path: {}", idx, image_path)
@@ -98,27 +95,30 @@ def main():
     logger.debug('url_template is {}', url_template)
     # url = 'https://cn.bing.com/images/search?q=m1+abrams&qs=HS&form=QBIR&sp=1&lq=0&pq=m1+&sc=10-3&cvid=9A16316DC66446E5A6EE6F8A81C4168B&ghsh=0&ghacc=0&first=1'
     # 需要爬取的图片关键词
-    key_wd = "柳岩"
-    local_image_dir = os.path.join('.', chinese_to_pinyin(re.sub(r'\W+', '', key_wd)))
+    key_wd = "特朗普"
+    local_image_dir = os.path.join('images', chinese_to_pinyin(re.sub(r'\W+', '', key_wd)))
     logger.debug('local_image_dir is {}', local_image_dir)
     key = urllib.parse.quote(key_wd)
     first = 1
     load_num = 35
     sfx = 1
+    max_sfx = 100
     # 最大照片数量
     max_image_num = 500
-    current_image_count = 1
+    current_image_count = 0
     # 图片保存路径
     os.makedirs(local_image_dir, exist_ok=True)
-    while current_image_count < max_image_num:
+    while current_image_count < max_image_num and sfx < max_sfx:
         # 获取缩略图列表页
         html = get_start_html(url_template, key, first, load_num, sfx, header)
-        image_url_gen = get_image_url(html)
-        for image_url in image_url_gen:
+        image_url_list = get_image_url(html)
+        logger.info('image_url_list length is {}, sfx is {}', len(image_url_list), sfx)
+        for image_url in image_url_list:
             ok = save_image(image_url, current_image_count, key_wd, local_image_dir)
             if ok:
                 current_image_count += 1
         sfx += 1
+        first = current_image_count + 1
 
 
 if __name__ == '__main__':

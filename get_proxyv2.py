@@ -1,13 +1,17 @@
 import json
 import re
 import concurrent.futures
+import sys
 from typing import Any
 
 import requests
 from loguru import logger
 from collections import defaultdict
 
-logger.level('INFO')
+logger.remove()
+logger.add(sys.stderr, level="INFO")
+
+
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
 headers = {
     'User-Agent': USER_AGENT
@@ -58,12 +62,7 @@ def concurrent_request(proxy_list, tag_urls) -> defaultdict[Any, list]:
     return ok_urls
 
 
-def main():
-    # 测试代理ip
-    # open https://cn.proxy-tools.com/proxy/https?page=1
-    # copy the page content then copy into  proxy_pages/proxy_pagesv1.txt
-    # ran this scripts
-    # 是否可用， 并打印可用的ip和端口
+def save_proxies():
     tag_urls = []
     proxy_list = ['http://127.0.0.1:7890']
     with (open('./proxy_pagesv1.txt', mode='rt', encoding='utf8') as f,
@@ -87,5 +86,6 @@ def main():
 
 
 if __name__ == '__main__':
-    # url = "https://3618med.com/product/p1.html"
-    main()
+    # 测试代理ip
+    # open https://cn.proxy-tools.com/proxy/https?page=1
+    save_proxies()
