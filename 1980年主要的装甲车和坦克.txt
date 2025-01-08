@@ -1,0 +1,110 @@
+国家：United States , 年份： 1981, 名称：M2 Bradley
+国家：United States , 年份： 1985, 名称：HMMWV (High Mobility Multi-Purpose Wheeled Vehicle) / (Humvee)
+国家：United States , 年份： 2002, 名称：General Dynamics Stryker
+国家：United Kingdom , 年份： 1998, 名称：Challenger 2 (FV4034)
+国家：Soviet Union , 年份： 1987, 名称：BMP-3 (Boyevaya Mashina Pekhoty)
+国家：Soviet Union , 年份： 1982, 名称：SA-19 (Grisom) / 2K22 Tunguska
+国家：United States , 年份： 1983, 名称：M270 MLRS
+国家：United Kingdom , 年份： 1986, 名称：FV510 Warrior
+国家：United Kingdom , 年份： 1981, 名称：Alvis FV4333 Stormer
+国家：Soviet Union , 年份： 1990, 名称：BMD-3 (Boyevaya Mashina Desanta)
+国家：Soviet Union , 年份： 1982, 名称：BMP-2 (Boyevaya Mashina Pekhoty)
+国家：Russia , 年份： 2004, 名称：BTR-90
+国家：Italy , 年份： 1991, 名称：CIO Centauro
+国家：United Kingdom , 年份： 1983, 名称：Challenger 1
+国家：United States , 年份： 1983, 名称：LAV-25 (Light Armored Vehicle 25)
+国家：United States , 年份： 1986, 名称：M9 ACE (Armored Combat Earthmover)
+国家：United States , 年份： 1989, 名称：HMMWV Avenger
+国家：India , 年份： 2004, 名称：DRDO Arjun (Lion)
+国家：United States , 年份： 1987, 名称：Chenowth Scorpion DPV (Desert Patrol Vehicle)
+国家：United States , 年份： 1989, 名称：Rock Island Arsenal M119
+国家：France , 年份： 1992, 名称：AMX-56 Leclerc
+国家：United States , 年份： 1987, 名称：M981 FIST-V
+国家：United States , 年份： 1994, 名称：HMMWV M1114 UAH (Up-Armored Humvee)
+国家：United States , 年份： 1990, 名称：M93 Fox
+国家：United Kingdom , 年份： 1983, 名称：Land Rover Defender 110
+国家：United States , 年份： 1983, 名称：M3 Bradley
+国家：South Korea , 年份： 1986, 名称：ROTEM K1 (Type 88)
+国家：Italy , 年份： 1992, 名称：Type 6614
+国家：United States , 年份： 1998, 名称：Oshkosh Medium Tactical Vehicle Replacement (MTVR)
+国家：Soviet Union , 年份： 1988, 名称：SA-12 (Gladiator / Giant) / S-300V
+国家：Canada , 年份： 1989, 名称：Oerlikon ADATS
+国家：United Kingdom , 年份： 1993, 名称：AS-90 (Gun Equipment 155mm L131)
+国家：Russia , 年份： 1995, 名称：T-90
+国家：United Kingdom , 年份： 2005, 名称：M777 UFH (Ultra-lightweight Field Howitzer)
+国家：Argentina , 年份： 1983, 名称：TAMSE TAM (Tanque Argentino Mediano)
+国家：China , 年份： 1985, 名称：NORINCO Type 85-II
+国家：China , 年份： 1985, 名称：NORINCO ZTZ-88 (Type 80/85/88)
+国家：China , 年份： 1982, 名称：NORINCO Type 69
+国家：Croatia , 年份： 1995, 名称：Duro Dakovic M-95 Degman
+国家：Iran , 年份： 1996, 名称：DIO Zulfiqar
+国家：Italy , 年份： 1995, 名称：CIO Ariete
+国家：Italy , 年份： 1981, 名称：OTO-Melara OF-40
+国家：Japan , 年份： 1992, 名称：Type 90 (Kyu-maru)
+国家：Pakistan , 年份： 2001, 名称：HIT Al Khalid (MBT 2000)
+国家：Poland , 年份： 1995, 名称：PT-91 Twardy
+国家：United States , 年份： 2003, 名称：Teledyne FLIR PackBot
+国家：United States , 年份： 2005, 名称：Boston Dynamics BigDog
+国家：Canada , 年份： 1996, 名称：Coyote LAV (Light Armored Vehicle)
+国家：Germany , 年份： 2011, 名称：ARTEC Boxer
+国家：Taiwan , 年份： 1990, 名称：CM-11 Brave Tiger (M48H)
+国家：United States , 年份： 2004, 名称：Force Protection Buffalo H
+国家：China , 年份： 2001, 名称：NORINCO ZTZ-99 (Type 99)
+国家：Italy , 年份： 1982, 名称：VCC Camillino
+国家：Canada , 年份： 1999, 名称：LAV III Kodiak
+国家：South Korea , 年份： 2013, 名称：ROTEM K2 (Black Panther)
+国家：France , 年份： 1981, 名称：AMX-10RC
+国家：United States , 年份： 2002, 名称：Force Protection Cougar
+国家：United Kingdom , 年份： 1983, 名称：Saxon AT105
+国家：United Kingdom , 年份： 2003, 名称：Supacat Jackal MWMIK
+国家：Italy , 年份： 1998, 名称：CIO Dardo
+国家：United States , 年份： 2011, 名称：MULE (Multifunction Utility / Logistics and Equipment)
+国家：United States , 年份： 2009, 名称：Oshkosh M-ATV
+国家：Austria , 年份： 1996, 名称：Pandur I
+国家：Germany , 年份： 1998, 名称：PzH 2000 (Panzerhaubitze 2000)
+国家：North Korea , 年份： 1992, 名称：Pokpung-ho (Storm Tiger) (M-2002)
+国家：North Korea , 年份： 1981, 名称：Chonma-ho (Pegasus)
+国家：North Korea , 年份： 1985, 名称：Type 85 (YW531H)
+国家：Soviet Union , 年份： 1987, 名称：BTR-80
+国家：Ukraine , 年份： 2000, 名称：BTR-94
+国家：Ukraine , 年份： 2001, 名称：BTR-3
+国家：Singapore , 年份： 2004, 名称：SSPH 1 Primus (Singapore Self-Propelled Howitzer 1)
+国家：South Africa , 年份： 1983, 名称：Denel GV5 Luiperd (G5 Leopard)
+国家：Japan , 年份： 2012, 名称：Type 10 MBT
+国家：Japan , 年份： 1987, 名称：Type 87 SPAAG
+国家：France , 年份： 1986, 名称：AMX-40
+国家：Brazil , 年份： 1987, 名称：Engesa EE-T1 Osorio
+国家：United States , 年份： 1988, 名称：Cadillac Gage Stingray
+国家：United States , 年份： 1996, 名称：XM8 / M8 Armored Gun System (AGS) (Close Combat Vehicle - Light)
+国家：Czechoslovakia , 年份： 1981, 名称：SpGH DANA (ZUZANA)
+国家：South Africa , 年份： 1988, 名称：Denel GV6 Renoster (G6 Rhino)
+国家：United Kingdom , 年份： 1997, 名称：G6 Marksman
+国家：Italy , 年份： 1982, 名称：OTO-Melara Palmaria
+国家：China , 年份： 1997, 名称：NORINCO ZTZ-96 (Type 96)
+国家：Poland , 年份： 2009, 名称：AMZ Zubr
+国家：Sweden , 年份： 1998, 名称：Stridsvagn 122 (Strv 122)
+国家：Sweden , 年份： 2001, 名称：CV90120 (CV90120-T / CV90-120)
+国家：Brazil , 年份： 1983, 名称：Bernardini MB-3 Tamoyo
+国家：Turkiye , 年份： 2002, 名称：T-155 Firtina (Storm)
+国家：South Korea , 年份： 1999, 名称：K9 Thunder
+国家：Poland , 年份： 2015, 名称：AHS Krab (Crab)
+国家：South Korea , 年份： 1985, 名称：K55 SPG
+国家：China , 年份： 1997, 名称：NORINCO PLZ-45 (Type 88)
+国家：Singapore , 年份： 1997, 名称：Bionix AFV
+国家：India , 年份： 2005, 名称：DRDO Abhay (Fearless)
+国家：Poland , 年份： 2003, 名称：KTO Rosomak
+国家：Finland , 年份： 2006, 名称：Patria AMV (Armored Modular Vehicle)
+国家：Finland , 年份： 1984, 名称：Patria Pasi XA
+国家：China , 年份： 2001, 名称：NORINCO PLL-05 (Type 05)
+国家：Indonesia , 年份： 2008, 名称：Pindad APS-3 Anoa (Pindad Panser)
+国家：South Korea , 年份： 2009, 名称：Hanwha K300 KNIFV (K21)
+国家：Sweden , 年份： 1993, 名称：Combat Vehicle 90 / Stridsfordon 90 (CV90 / Strf 90
+国家：Taiwan , 年份： 2007, 名称：CM-32 Yunpao (Clouded Leopard) / TIFV (Taiwan Infantry Fighting Vehicle)
+国家：Germany , 年份： 1981, 名称：Rheinmetall Landsysteme Condor
+国家：Soviet Union , 年份： 1989, 名称：2S19 MSTA
+国家：United States , 年份： 2000, 名称：M915A5
+国家：Japan , 年份： 1995, 名称：Type 96 (APC)
+国家：Israel , 年份： 2007, 名称：Sabra (M60T)
+国家：Iran , 年份： 1997, 名称：DIO Boragh
+国家：Ukraine , 年份： 2009, 名称：BTR-4
+国家：Ukraine , 年份： 1999, 名称：T-84 (Oplot)
