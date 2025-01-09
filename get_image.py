@@ -64,7 +64,7 @@ def save_image(
         download_image(image_url, image_path, use_proxy=True)
     except Exception as e:
         logger.error('{} error {}', image_url, e)
-        return False, None, None
+        return False, None, image_url
     else:
         logger.info("have saved {} images, image_path: {}", idx, image_path)
         return True, image_path, image_url
@@ -87,6 +87,9 @@ def remove_saved_images(image_url_list, cache_file='image_cache.json'):
         # 判断是否已下载
         if image_url not in cached_urls:
             new_image_url_list.append(image_url)
+        else:
+            if not os.path.exists(cached_urls[image_url]):
+                new_image_url_list.append(image_url)
     return new_image_url_list
 
 
@@ -104,7 +107,7 @@ def update_save_image_cache(image_path, image_url, cache_file='image_cache.json'
             json.dump(cached_urls, f, indent=4)
 
 
-def get_bing_image_by_kwd(key_wd):
+def get_bing_image_by_kwd(key_wd, group_dir='.'):
     '''
     通过关键词获取到图片
     :return:
@@ -117,24 +120,28 @@ def get_bing_image_by_kwd(key_wd):
     logger.debug('url_template is {}', url_template)
     # url = 'https://cn.bing.com/images/search?q=m1+abrams&qs=HS&form=QBIR&sp=1&lq=0&pq=m1+&sc=10-3&cvid=9A16316DC66446E5A6EE6F8A81C4168B&ghsh=0&ghacc=0&first=1'
 
-    local_image_dir = os.path.join('images', chinese_to_pinyin(re.sub(r'\W+', '', key_wd)))
+    local_image_dir = os.path.join('images', group_dir, chinese_to_pinyin(re.sub(r'\W+', '', key_wd)))
     logger.debug('local_image_dir is {}', local_image_dir)
     key = urllib.parse.quote(key_wd)
     first = 1
     load_num = 35
     sfx = 1
-    max_sfx = 100
+    max_sfx = 300
     # 最大照片数量
-    max_image_num = 100
+    max_image_num = 300
     # 图片保存路径
     os.makedirs(local_image_dir, exist_ok=True)
     current_image_count = len(os.listdir(local_image_dir))
+    image_url_list = []
     while current_image_count < max_image_num and sfx < max_sfx:
         # 获取缩略图列表页
         html = get_start_html(url_template, key, first, load_num, sfx, header)
-        image_url_list = get_image_url(html)
+        image_url_list.extend(get_image_url(html))
         image_url_list = remove_saved_images(image_url_list)
         logger.info('image_url_list length is {}, sfx is {}', len(image_url_list), sfx)
+        if len(image_url_list) < 32:
+            continue
+
         with ThreadPoolExecutor(max_workers=8) as executor:
             futures = {}
             for idx, image_url in enumerate(image_url_list, start=1):
@@ -147,13 +154,15 @@ def get_bing_image_by_kwd(key_wd):
                     update_save_image_cache(image_path, image_url)
             sfx += 1
             first = current_image_count + 1
+            image_url_list.clear()
 
 
-def get_list_kwd(key_wds):
+def get_list_kwd(key_wds, group_dir='.'):
+    # 按关键词列表, 多线程下载
     with ThreadPoolExecutor(max_workers=8) as executor:
         futures = {}
         for idx, key_wd in enumerate(key_wds):
-            fs = executor.submit(get_bing_image_by_kwd, key_wd)
+            fs = executor.submit(get_bing_image_by_kwd, key_wd, group_dir)
             futures[fs] = key_wd
         for fs in as_completed(futures):
             pass
@@ -171,8 +180,18 @@ def get_kwd_v1():
         return names
 
 
+def get_kwd_v2():
+    # 读取关键词
+    with open('世界前十战斗机.txt', 'r', encoding='utf-8') as f:
+        names = []
+        for line in f.readlines():
+            name = line.strip()
+            names.append(name)
+        return names
+
+
 if __name__ == '__main__':
     # 需要爬取的图片关键词
-    key_wds = get_kwd_v1()
+    key_wds = get_kwd_v2()
     logger.info('key_wds is {}', key_wds)
-    get_list_kwd(key_wds)
+    get_list_kwd(key_wds, '世界前十战斗机')

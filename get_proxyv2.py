@@ -30,21 +30,24 @@ def fetch_data(tar_url, proxy):
             'https': proxy
         }
         response = requests.get(tar_url, headers=headers, proxies=proxies, timeout=60)
-        response.raise_for_status()  # 如果请求失败（例如，4xx、5xx），则抛出HTTPError异常
-        logger.debug(f"proxy: {proxy}, Status Code: {response.status_code}")
+        if response.status_code > 406:
+            response.raise_for_status()
+
+        logger.debug(f"ok proxy: {proxy}, Status Code: {response.status_code}")
         return {
             'proxy': proxy,
             'tag_url': tar_url,
             'status_code': response.status_code
         }
     except requests.RequestException as e:
-        logger.error("proxy: {proxy}, error is: {e}", proxy=proxy, e=e)
+        logger.debug("bad proxy: {proxy}, error is: {e}", proxy=proxy, e=e)
         return None
 
 
 def concurrent_request(proxy_list, tag_urls) -> defaultdict[Any, list]:
     ok_urls = defaultdict(list)
-    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:  # 你可以根据需要调整max_workers的值
+    print(proxy_list)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1000) as executor:  # 你可以根据需要调整max_workers的值
         future_to_url = {executor.submit(fetch_data, tag_url, proxy): (tag_url, proxy) for proxy in proxy_list for tag_url in tag_urls}
         for future in concurrent.futures.as_completed(future_to_url):
             tag_url, proxy = future_to_url[future]
@@ -52,7 +55,7 @@ def concurrent_request(proxy_list, tag_urls) -> defaultdict[Any, list]:
                 # 通过调用future.result()来获取函数的返回值，这会阻塞，直到结果可用
                 # 但是请注意，这里我们只是打印结果，没有返回值，所以调用future.result()只是为了等待函数完成
                 res = future.result()
-                if res and res['status_code'] == 200:
+                if res and res['status_code']:
                     ok_urls[res['proxy']].append(res['tag_url'])
                 else:
                     logger.debug('not ok tag_url, proxy {}, {}', tag_url, proxy)
@@ -82,7 +85,7 @@ def save_proxies():
             json.dump(ok_list, f, ensure_ascii=False, indent=4)
         with open('./proxy_list.txt', mode='w', encoding='utf8') as f:
             f.write('\n'.join(ok_list.keys()))
-        logger.debug('save to proxy list ok')
+        logger.info('save to proxy list ok')
 
 
 if __name__ == '__main__':
