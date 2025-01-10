@@ -1,12 +1,14 @@
 import json
 import os
-import urllib
-from bs4 import BeautifulSoup
 import re
 import time
-from loguru import logger
+import urllib
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
+from argparse import ArgumentParser
+
+from bs4 import BeautifulSoup
+from loguru import logger
 from pypinyin import lazy_pinyin
 
 from download_with_proxy import download_image
@@ -72,7 +74,7 @@ def save_image(
 
 def chinese_to_pinyin(text):
     pinyin_list = lazy_pinyin(text)
-    return ''.join(pinyin_list)
+    return '-'.join(pinyin_list)
 
 
 def remove_saved_images(image_url_list, cache_file='image_cache.json'):
@@ -128,7 +130,7 @@ def get_bing_image_by_kwd(key_wd, group_dir='.'):
     sfx = 1
     max_sfx = 300
     # 最大照片数量
-    max_image_num = 300
+    max_image_num = 123
     # 图片保存路径
     os.makedirs(local_image_dir, exist_ok=True)
     current_image_count = len(os.listdir(local_image_dir))
@@ -155,9 +157,10 @@ def get_bing_image_by_kwd(key_wd, group_dir='.'):
             sfx += 1
             first = current_image_count + 1
             image_url_list.clear()
+    return local_image_dir
 
 
-def get_list_kwd(key_wds, group_dir='.'):
+def get_list_kwd(key_wds, group_dir):
     # 按关键词列表, 多线程下载
     with ThreadPoolExecutor(max_workers=8) as executor:
         futures = {}
@@ -165,7 +168,7 @@ def get_list_kwd(key_wds, group_dir='.'):
             fs = executor.submit(get_bing_image_by_kwd, key_wd, group_dir)
             futures[fs] = key_wd
         for fs in as_completed(futures):
-            pass
+            logger.info('get {} images by the key word {} and saved at {}', len(key_wds), key_wd, fs.result())
 
 
 def get_kwd_v1():
@@ -180,9 +183,9 @@ def get_kwd_v1():
         return names
 
 
-def get_kwd_v2():
+def get_kwd_v2(kwd_file):
     # 读取关键词
-    with open('世界前十战斗机.txt', 'r', encoding='utf-8') as f:
+    with open(kwd_file, 'r', encoding='utf-8') as f:
         names = []
         for line in f.readlines():
             name = line.strip()
@@ -192,6 +195,9 @@ def get_kwd_v2():
 
 if __name__ == '__main__':
     # 需要爬取的图片关键词
-    key_wds = get_kwd_v2()
+    parser = ArgumentParser('get image from bing.com')
+    parser.add_argument('--kwd', type=str, required=True)
+    args = parser.parse_args()
+    key_wds = get_kwd_v2(args.kwd)
     logger.info('key_wds is {}', key_wds)
-    get_list_kwd(key_wds, '世界前十战斗机')
+    get_list_kwd(key_wds, args.kwd.split('.')[0])
