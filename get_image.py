@@ -77,8 +77,9 @@ def chinese_to_pinyin(text):
     return '-'.join(pinyin_list)
 
 
-def remove_saved_images(image_url_list, cache_file='image_cache.json'):
+def filter_saved_images(image_url_list, cache_file='image_cache.json'):
     new_image_url_list = []
+    saved_image_list = []
     # 加载缓存
     if os.path.exists(cache_file):
         with open(cache_file, 'r') as f:
@@ -92,7 +93,10 @@ def remove_saved_images(image_url_list, cache_file='image_cache.json'):
         else:
             if not os.path.exists(cached_urls[image_url]):
                 new_image_url_list.append(image_url)
-    return new_image_url_list
+            else:
+                saved_image_list.append(image_url)
+                logger.info('{} have been save already', image_url)
+    return new_image_url_list, saved_image_list
 
 
 def update_save_image_cache(image_path, image_url, cache_file='image_cache.json'):
@@ -130,7 +134,7 @@ def get_bing_image_by_kwd(key_wd, group_dir='.'):
     sfx = 1
     max_sfx = 300
     # 最大照片数量
-    max_image_num = 123
+    max_image_num = 50
     # 图片保存路径
     os.makedirs(local_image_dir, exist_ok=True)
     current_image_count = len(os.listdir(local_image_dir))
@@ -139,7 +143,7 @@ def get_bing_image_by_kwd(key_wd, group_dir='.'):
         # 获取缩略图列表页
         html = get_start_html(url_template, key, first, load_num, sfx, header)
         image_url_list.extend(get_image_url(html))
-        image_url_list = remove_saved_images(image_url_list)
+        image_url_list, saved_image_list = filter_saved_images(image_url_list)
         logger.info('image_url_list length is {}, sfx is {}', len(image_url_list), sfx)
         if len(image_url_list) < 32:
             continue
